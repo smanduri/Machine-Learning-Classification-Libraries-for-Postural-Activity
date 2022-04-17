@@ -27,18 +27,3 @@ if __name__ == "__main__":
     # Query 1:
     query = np.array([[5.7, 2.9, 4.2, 1.3]])
     print("Query 1:- {} ---> {}".format(query, gnb_clf.predict(query)))
-
-    #############################################################################################################
-
-
-    # Query 1:
-    query = np.array([[6, 130, 8]])
-    print("Query 1:- {} ---> {}".format(query, gnb_clf.predict(query)))
-
-    # Query 2:
-    query = np.array([[5, 80, 6]])
-    print("Query 2:- {} ---> {}".format(query, gnb_clf.predict(query)))
-
-    # Query 3:
-    query = np.array([[7, 140, 14]])
-    print("Query 3:- {} ---> {}".format(query, gnb_clf.predict(query)))
