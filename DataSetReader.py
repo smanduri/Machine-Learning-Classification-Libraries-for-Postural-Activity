@@ -38,5 +38,5 @@ class DataSetReader:
         for item in items:
             item["Tag"] = tag_identifier.get(item["Tag"], None)
 
-        dataFrame_Dataset = pd.DataFrame(items)
+        dataFrame_Dataset = pd.DataFrame(items, index=None)
         return dataFrame_Dataset
