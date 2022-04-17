@@ -74,7 +74,7 @@ class BinaryLogisticRegression:
         param this_expression: The model expression for each input sample data
         return: The logistic function output for the input expression
         """
-        return 1 / (1 + np.exp(-this_expression))
+        return (1 / (1 + np.exp(-this_expression)))
 
     def class_predictor(self, input_data2):
         """
@@ -86,11 +86,8 @@ class BinaryLogisticRegression:
         predicted_model_class = None
         model_expression = np.dot(input_data2, self.model_weights) + self.model_bias
         predicted_model_output = self.logistic_function(model_expression)
-        for each_output_sample in predicted_model_output:
-            if each_output_sample > 0.5:
-                predicted_model_class = 1
-            else:
-                predicted_model_class = 0
+        predicted_model_class = [1 if each_output_sample > 0.5 else 0
+                                 for each_output_sample in predicted_model_output]
         return predicted_model_class
 
     @staticmethod
@@ -106,7 +103,7 @@ class BinaryLogisticRegression:
         return percent_accuracy
 
 
-test_dataset = datasets.load_breast_cancer()
+test_dataset = datasets.load_iris()
 test_input_data, test_output_data = test_dataset.data, test_dataset.target
 input_train, input_test, output_train, output_test = train_test_split(test_input_data, test_output_data,
                                                                       test_size=0.2, random_state=1234)
