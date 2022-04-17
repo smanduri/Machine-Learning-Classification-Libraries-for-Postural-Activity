@@ -1,4 +1,5 @@
 import csv
+import pandas as pd
 
 """
 Class Name: DataSetReader
@@ -11,23 +12,24 @@ class DataSetReader:
     """
     Method Name: getCsvDataset
     Functionality: Reads the csv files. Returns the Values and Replaces the Tag Identifier
-    Return: CSV file format of the Dataset
+    Return: pandas.core.frame.DataFrame format of the Dataset
     """
 
     @classmethod
     def getCsvDataset(cls):
 
+        # The Tag Identifier Information is in the dataset/dataSetDescription.txt
         tag_identifier = {"010-000-024-033": "ANKLE_LEFT", "010-000-030-096": "ANKLE_RIGHT", "020-000-033-111": "CHEST",
                           "020-000-032-221": "BELT"}
+
+        # Reading the File form the dataset/data.csv directory
         with open('dataset/data.csv', 'r') as f:
             reader = csv.DictReader(f)
             items = list(reader)
 
+            # Replacing the Tag Numbers with the Tag_Identifier Dictionary else; None
             for item in items:
                 item["Tag"] = tag_identifier.get(item["Tag"], None)
 
-            keys = items[0].keys()
-
-            print(keys)
-
-            return items
+            dataFrame_Dataset = pd.DataFrame(items)
+            return dataFrame_Dataset
