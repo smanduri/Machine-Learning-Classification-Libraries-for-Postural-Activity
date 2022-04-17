@@ -44,29 +44,29 @@ def findEntropy(data, rows):
         elif data[i][idx] == 'falling':
             falling+=1
         elif data[i][idx] == 'lying down':
-            l_down+=1    
+            l_down+=1
         elif data[i][idx] == 'sitting down':
-            s_down+=1   
+            s_down+=1
         elif data[i][idx] == 'sitting':
-            sitting+=1 
+            sitting+=1
         elif data[i][idx] == 'standing up from lying':
-            standing_up_from_lying+=1 
+            standing_up_from_lying+=1
         elif data[i][idx] == 'on all fours':
          on_all_fours+=1
         elif data[i][idx] == 'sitting on the ground':
-         sitting_on_the_ground+=1          
+         sitting_on_the_ground+=1
         elif data[i][idx] == 'standing up from sitting':
-            standing_up_from_sitting+=1         
+            standing_up_from_sitting+=1
         elif data[i][idx] == 'standing up from sitting on the ground':
             standing_up_from_sitting_on_ground+=1
         else:
-            lying+=1    
-            
+            lying+=1
+
     total_count+=(walking+falling+l_down+s_down+sitting+standing_up_from_lying+sitting_on_the_ground+standing_up_from_sitting+standing_up_from_sitting_on_ground)
-    
+
     if total_count==0:
         return 0,0
-    
+
     a=walking/total_count
     b=falling/total_count
     c=l_down/total_count
@@ -80,13 +80,13 @@ def findEntropy(data, rows):
     k=lying/total_count
     # print(a,b,c,d,e,f,g,h,i,j,k,total_count)
     factor=0
-        
+
     if a!=0:
             factor+=a*math.log2(a)
     elif b!=0:
                factor+=b*math.log2(b)
     elif c!=0:
-               factor+=c*math.log2(c) 
+               factor+=c*math.log2(c)
     elif d!=0:
                 factor+=d*math.log2(d)
     elif e!=0:
@@ -98,11 +98,11 @@ def findEntropy(data, rows):
     elif h!=0:
                 factor+=h*math.log2(h)
     elif i!=0:
-                factor+=i*math.log2(i) 
+                factor+=i*math.log2(i)
     elif j!=0:
                 factor+=j*math.log2(j)
     elif k!=0:
-                factor+=k*math.log2(k) 
+                factor+=k*math.log2(k)
     entropy = -1 * factor
     if a==1:
         ans=1
@@ -125,8 +125,8 @@ def findEntropy(data, rows):
     elif j==1:
         ans=10
     elif k==1:
-        ans=11            
-                                     
+        ans=11
+
     return entropy, ans
 
 
@@ -135,10 +135,7 @@ def findMaxGain(data, rows, columns):
     retidx = -1
     entropy, ans = findEntropy(data, rows)
     if entropy == 0:
-        """if ans == 1:
-            print("Yes")
-        else:
-            print("No")"""
+        
         return maxGain, retidx, ans
 
     for jj in columns:
@@ -173,26 +170,26 @@ def findMaxGain(data, rows, columns):
                     elif data[ii][idx] == 'falling':
                         falling+=1
                     elif data[ii][idx] == 'lying down':
-                        l_down+=1    
+                        l_down+=1
                     elif data[ii][idx] == 'sitting down':
-                        s_down+=1   
+                        s_down+=1
                     elif data[ii][idx] == 'sitting':
-                        sitting+=1 
+                        sitting+=1
                     elif data[ii][idx] == 'standing up from lying':
-                        standing_up_from_lying+=1 
+                        standing_up_from_lying+=1
                     elif data[ii][idx] == 'on all fours':
                         on_all_fours+=1
                     elif data[ii][idx] == 'sitting on the ground':
-                         sitting_on_the_ground+=1          
+                         sitting_on_the_ground+=1
                     elif data[ii][idx] == 'standing up from sitting':
-                         standing_up_from_sitting+=1         
+                         standing_up_from_sitting+=1
                     elif data[ii][idx] == 'standing up from sitting on the ground':
                         standing_up_from_sitting_on_ground+=1
                     else:
-                        lying+=1    
+                        lying+=1
             # print(yes, no)
             total_count+=walking+falling+l_down+s_down+sitting+standing_up_from_lying+sitting_on_the_ground+standing_up_from_sitting+standing_up_from_sitting_on_ground+lying
-    
+
             a=walking/total_count
             b=falling/total_count
             c=l_down/total_count
@@ -213,7 +210,7 @@ def findMaxGain(data, rows, columns):
             elif b!=0:
                factor+=b*math.log2(b)
             elif c!=0:
-               factor+=c*math.log2(c) 
+               factor+=c*math.log2(c)
             elif d!=0:
                 factor+=d*math.log2(d)
             elif e!=0:
@@ -225,13 +222,13 @@ def findMaxGain(data, rows, columns):
             elif h!=0:
                 factor+=h*math.log2(h)
             elif i!=0:
-                factor+=i*math.log2(i) 
+                factor+=i*math.log2(i)
             elif j!=0:
                 factor+=j*math.log2(j)
             elif k!=0:
-                factor+=k*math.log2(k)                                     
+                factor+=k*math.log2(k)
             # gain += (mydict[key] * (a*math.log2(a) + b*math.log2(b)+ c*math.log2(c)+ d*math.log2(d) +e*math.log2(e)+ f*math.log2(f) +g*math.log2(g) +h*math.log2(h)+ i*math.log2(i)+ j*math.log2(j)+k*math.log2(k)))/(rows-1)
-            
+
             gain+=((mydict[key]*factor)/(Rows))
         # print(gain)
         if gain > maxGain:
@@ -270,9 +267,9 @@ def buildTree(data, rows, columns):
         elif ans==9:
             root.value='standing up from sitting '
         elif ans==10:
-            root.value='standing up from sitting on the ground ' 
+            root.value='standing up from sitting on the ground '
         else:
-            root.value='lying'                                   
+            root.value='lying'
         return root
 
     root.value = attribute[idx]
