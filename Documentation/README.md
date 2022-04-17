@@ -14,12 +14,12 @@ https://github.com/kraoNEU/Machine-Learning-Classification-Libraries-for-Postura
 
 **Summary:**
 
-Intoday’smodernlifestyle,itisparamounttohaveagoodpostureasitisanimportantfactortohavehealthy
-lumbarsupportandagoodmuscularandskeletalorientation.Similarly,olderpeoplerequireconstantcareand
-monitoring.Incriticalorunusualsituations,theymayrequireurgentmedicalattention.Thefollowingpaper
-presentsamulti-agentsystemforthecareofelderlypeoplelivingathomeontheirown,toprolongtheir
-independence.Ourprojectisbasedonthedatasetgeneratedthroughthissystem,composedofsevensensors,
-testedondifferentpeopleandindifferentsetsofenvironments.Weaimtodesignvariouswaystoimplement
+In today’s modern lifestyle, it is paramount to have a good posture as it is an important factor to have healthy
+lumbar support and a good muscular and skeletal orientation. Similarly, older people require constant care and
+monitoring. In critical or unusual situations, they may require urgent medical attention. The following paper
+presents a multi-agent system for the care of elderly people living at home on their own, to prolong their
+independence. Our project is based on the dataset generated through this system, composed of seven sensors,
+tested on different people and in different sets of environments. We aim to design various ways to implement
 machine learning classification on the given dataset.
 
 **Paper:**
@@ -27,9 +27,9 @@ machine learning classification on the given dataset.
 
 **Dataset:**
 https://archive.ics.uci.edu/ml/datasets/Localization+Data+for+Person+Activity
-Inthisproject,wewillbeimplementing 3 machinelearningclassificationalgorithmsonafixeddataset.Our
-project,basedonthedata,willclassifythedatasetintodifferenttargetvariablessuchasdifferentpostures:
-sitting,standing,lying,walking,etc.Itwillalsorecommendwhichalgorithmworksbestforagivenpostural
+In this project, we will be implementing 3 machine learning classification algorithms on a fixed dataset. Our
+project, based on the data, will classify the dataset into different target variables such as different postures:
+sitting, standing, lying, walking, etc.It will also recommend which algorithm works best for a given postural
 data-set. Along with this, each algorithm will calculate the accuracy of its model.
 
 **Proposed Design:**
