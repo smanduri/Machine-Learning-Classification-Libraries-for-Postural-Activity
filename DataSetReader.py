@@ -22,14 +22,21 @@ class DataSetReader:
         tag_identifier = {"010-000-024-033": "ANKLE_LEFT", "010-000-030-096": "ANKLE_RIGHT", "020-000-033-111": "CHEST",
                           "020-000-032-221": "BELT"}
 
-        # Reading the File form the dataset/data.csv directory
-        with open('dataset/data.csv', 'r') as f:
-            reader = csv.DictReader(f)
-            items = list(reader)
+        try:
+            # Reading the File form the dataset/data.csv directory
+            with open('dataset/data.csv', 'r') as f:
+                reader = csv.DictReader(f)
+                items = list(reader)
 
-            # Replacing the Tag Numbers with the Tag_Identifier Dictionary else; None
-            for item in items:
-                item["Tag"] = tag_identifier.get(item["Tag"], None)
+        except FileNotFoundError:
+            print("Unable to Find the File, Check the File Path")
 
-            dataFrame_Dataset = pd.DataFrame(items)
-            return dataFrame_Dataset
+        except UnboundLocalError:
+            print("Items is being Iterated with a Blank File, Check the File Path")
+
+        # Replacing the Tag Numbers with the Tag_Identifier Dictionary else; None
+        for item in items:
+            item["Tag"] = tag_identifier.get(item["Tag"], None)
+
+        dataFrame_Dataset = pd.DataFrame(items)
+        return dataFrame_Dataset
