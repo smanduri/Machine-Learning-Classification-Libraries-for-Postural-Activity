@@ -27,9 +27,9 @@ machine learning classification on the given dataset.
 
 **Dataset:**
 https://archive.ics.uci.edu/ml/datasets/Localization+Data+for+Person+Activity
-Inthisproject,wewillbeimplementing 3 machinelearningclassificationalgorithmsonafixeddataset.Our
-project,basedonthedata,willclassifythedatasetintodifferenttargetvariablessuchasdifferentpostures:
-sitting,standing,lying,walking,etc.Itwillalsorecommendwhichalgorithmworksbestforagivenpostural
+In this project, we will be implementing 3 machine learning classification algorithms on a fixed dataset. Our
+project, based on the data, will classify the dataset into different target variables such as different postures:
+sitting, standing, lying, walking, etc.It will also recommend which algorithm works best for a given postural
 data-set. Along with this, each algorithm will calculate the accuracy of its model.
 
 **Proposed Design:**
