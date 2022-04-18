@@ -1,4 +1,5 @@
 
+#import the libraries
 from functools import total_ordering
 import numpy as np
 import matplotlib.pyplot as plt
@@ -6,15 +7,16 @@ import pandas as pd
 import math
 import copy
 
-dataset = pd.read_csv('data.csv')
+#reading the data and printing total shape of dataset
+dataset = pd.read_csv('Data.csv')
 X = dataset.iloc[:, 1:].values
 Rows=dataset.shape[0]
-
 
 # print(X)
 attribute = ['tag', 'x', 'y', 'z']
 
-
+#Define a class
+# with refer objects to value decisions and childs as fields for attribute
 class Node(object):
     def __init__(self):
         self.value = None
@@ -22,6 +24,12 @@ class Node(object):
         self.childs = None
 
 
+
+#function for finding entropy
+"""#### This function defines a findEntropy functions which takes two arguments (data and rows) and
+further defines the classified attribute (features) Activity columns and calculates the
+entropy return the value of entrop and ans P(E). It finally selects the attribute based on feature(Activity)
+which has the smallest entropy"""
 def findEntropy(data, rows):
     walking=0
     falling=0
@@ -38,6 +46,7 @@ def findEntropy(data, rows):
     idx = len(data[0]) - 1
     entropy = 0
     total_count=0
+    # each iteration defined for the feature set choosing each value to match up with given Activity
     for i in rows:
         if data[i][idx] == 'walking':
             walking+= 1
@@ -61,12 +70,12 @@ def findEntropy(data, rows):
             standing_up_from_sitting_on_ground+=1
         else:
             lying+=1
-
+      # total_count based upon the activities
     total_count+=(walking+falling+l_down+s_down+sitting+standing_up_from_lying+sitting_on_the_ground+standing_up_from_sitting+standing_up_from_sitting_on_ground)
 
     if total_count==0:
         return 0,0
-
+    #counting total_count division for each of the activities based upon the entropy
     a=walking/total_count
     b=falling/total_count
     c=l_down/total_count
@@ -78,9 +87,9 @@ def findEntropy(data, rows):
     i=standing_up_from_sitting/total_count
     j=standing_up_from_sitting_on_ground/total_count
     k=lying/total_count
-    # print(a,b,c,d,e,f,g,h,i,j,k,total_count)
+    #print(a,b,c,d,e,f,g,h,i,j,k,total_count)
     factor=0
-
+    # each iteration iterates through the given set and calculates Entropy
     if a!=0:
             factor+=a*math.log2(a)
     elif b!=0:
@@ -88,22 +97,23 @@ def findEntropy(data, rows):
     elif c!=0:
                factor+=c*math.log2(c)
     elif d!=0:
-                factor+=d*math.log2(d)
+               factor+=d*math.log2(d)
     elif e!=0:
-                factor+=e*math.log2(e)
+               factor+=e*math.log2(e)
     elif f!=0:
-                  factor+=f*math.log2(f)
+               factor+=f*math.log2(f)
     elif g!=0:
-                factor+=g*math.log2(g)
+               factor+=g*math.log2(g)
     elif h!=0:
-                factor+=h*math.log2(h)
+               factor+=h*math.log2(h)
     elif i!=0:
-                factor+=i*math.log2(i)
+               factor+=i*math.log2(i)
     elif j!=0:
-                factor+=j*math.log2(j)
+               factor+=j*math.log2(j)
     elif k!=0:
-                factor+=k*math.log2(k)
+               factor+=k*math.log2(k)
     entropy = -1 * factor
+    #selecting the final entropy based on negative times of given factor
     if a==1:
         ans=1
     elif b==1:
@@ -129,13 +139,19 @@ def findEntropy(data, rows):
 
     return entropy, ans
 
+"""#### Defining a function findMaxGain takes 3 arguments data(act), rows, columns and returns maxGain
+based on target classification of the activity on the selecting attribute
+separation from the training set"""
 
 def findMaxGain(data, rows, columns):
     maxGain = 0
     retidx = -1
     entropy, ans = findEntropy(data, rows)
     if entropy == 0:
-        
+        """if ans == 1:
+            print("Yes")
+        else:
+            print("No")"""
         return maxGain, retidx, ans
 
     for jj in columns:
@@ -188,8 +204,9 @@ def findMaxGain(data, rows, columns):
                     else:
                         lying+=1
             # print(yes, no)
+            # sum of the total activity for the gini index consideration based on gain
             total_count+=walking+falling+l_down+s_down+sitting+standing_up_from_lying+sitting_on_the_ground+standing_up_from_sitting+standing_up_from_sitting_on_ground+lying
-
+            #split each values of Activity classifying based on total_count (DTC)
             a=walking/total_count
             b=falling/total_count
             c=l_down/total_count
@@ -203,6 +220,7 @@ def findMaxGain(data, rows, columns):
             k=lying/total_count
             # print(x, y)
             # print(a,b,c,d,e,f,g,h,i,j,k,total_count)
+            #factor the gain value on each attribute to takes log to determine the max gain for the given set(act)
             factor=0
             if a!=0:
               if a!=0:
@@ -231,22 +249,27 @@ def findMaxGain(data, rows, columns):
 
             gain+=((mydict[key]*factor)/(Rows))
         # print(gain)
+        # conditionality for checking the gain if max than Maxgain the re-assigned
         if gain > maxGain:
-            # print("hello")
+
             maxGain = gain
             retidx = jj
 
     return maxGain, retidx, ans
 
+"""#### New function buildTree with attributes data, rows and columns to build the final decision
+classifier (considering max gain, entropy)"""
 
 def buildTree(data, rows, columns):
 
     maxGain, idx, ans = findMaxGain(X, rows, columns)
+    #Making Node defining childs of root
     root = Node()
     root.childs = []
     # print(maxGain
     #
     # )
+    # selecting the max gain value based on each classification decision on ans value
     if maxGain == 0:
         if ans == 1:
             root.value = 'walking'
@@ -289,28 +312,29 @@ def buildTree(data, rows, columns):
             if data[i][idx] == key:
                 newrows.append(i)
         # print(newrows)
+        #building Tree based on the decison as key parameter
         temp = buildTree(data, newrows, newcolumns)
         temp.decision = key
         root.childs.append(temp)
     return root
 
-
+#traverse/print the tree with value (key, value) -> decisions
 def traverse(root):
     print(root.decision)
     print(root.value)
 
     n = len(root.childs)
     if n > 0:
+      # each iteration w.r.t root taverse child node
         for i in range(0, n):
             traverse(root.childs[i])
 
-
+# calculate function that does the final call towards the buildTree with defined rows and columns
 def calculate():
     row = [i for i in range(0,1200)]
     columns = [i for i in range(1, 6)]
     root = buildTree(X, row, columns)
     root.decision = 'Start'
     traverse(root)
-
 
 calculate()
