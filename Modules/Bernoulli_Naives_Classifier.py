@@ -19,8 +19,6 @@ class GaussianNB:
     @staticmethod
     def accuracy_score(y_true, y_pred):
 
-        """	score = (y_true - y_pred) / len(y_true) """
-
         return round(float(sum(y_pred == y_true)) / float(len(y_true)) * 100, 2)
 
     @staticmethod
@@ -76,6 +74,7 @@ class GaussianNB:
             for outcome in np.unique(self.y_train):
                 self.likelihoods[feature][outcome]['mean'] = self.X_train[feature][
                     self.y_train[self.y_train == outcome].index.values.tolist()].mean()
+
                 self.likelihoods[feature][outcome]['variance'] = self.X_train[feature][
                     self.y_train[self.y_train == outcome].index.values.tolist()].var()
 
