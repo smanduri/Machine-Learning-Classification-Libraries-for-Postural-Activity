@@ -62,8 +62,8 @@ being a string type is a categorical variable. Unfortunately, Sklearn Decision T
 variables[challenge faced in this assignment]. But we can convert these features to numerical values and use
 pr-processing section to handle them. We will be using a train/test split on our decision tree. We will import
 train_test_split from sklearn.cross_validation. Now train_test_split will return 4 different parameters.
-**3. Bernoulli Naive Bayes Classification**
 
+**3. Bernoulli Naive Bayes Classification**
 **Class:** BernoulliNaivesBayesClassifier
 **Methods and Functions:
 calculating_the_likelihood():** This is for calculatingthe likelihood of the class function,
