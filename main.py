@@ -12,11 +12,11 @@ if __name__ == "__main__":
 
     data = pd.read_csv("dataset/Iris.csv")
 
-    # Split fearures and target
+    # Split features and target
     X, y = GaussianNB.pre_processing(data)
 
     # Split data into Training and Testing Sets
-    X_train, X_test, y_train, y_test = GaussianNB.train_test_split(X, y, test_size=0.1, random_state=0)
+    X_train, X_test, y_train, y_test = GaussianNB.train_test_split(X, y, test_train_split=0.5)
 
     # print(X_train, y_train)
 

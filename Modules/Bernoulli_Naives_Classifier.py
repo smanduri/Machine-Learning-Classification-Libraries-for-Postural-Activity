@@ -30,9 +30,9 @@ class GaussianNB:
         return X, y
 
     @staticmethod
-    def train_test_split(x, y, test_size=0.25, random_state=None):
+    def train_test_split(x, y, test_train_split=0.25, random_state=None):
 
-        x_test = x.sample(frac=test_size, random_state=random_state)
+        x_test = x.sample(frac=test_train_split, random_state=random_state)
         y_test = y[x_test.index]
 
         x_train = x.drop(x_test.index)
