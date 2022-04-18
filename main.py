@@ -26,7 +26,7 @@ if __name__ == "__main__":
     # print(X_train, y_train)
 
     print("Train Accuracy: {}".format(GaussianNB.accuracy_score(y_train, gnb_clf.predict(X_train))))
-    print("Test Accuracy: {}".format(GaussianNB.accuracy_score(y_test, gnb_clf.predict(X_test))))
+    # print("Test Accuracy: {}".format(GaussianNB.accuracy_score(y_test, gnb_clf.predict(X_test))))
 
     # Query 1:
     query = np.array([[5.7, 2.9, 4.2, 1.3]])
