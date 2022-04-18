@@ -15,8 +15,8 @@ Rows=dataset.shape[0]
 # print(X)
 attribute = ['tag', 'x', 'y', 'z']
 
-#Define a class
-# with refer objects to value decisions and childs as fields for attribute
+#Let's Define a class
+# that refers an objects to value decisions and childs as fields for attribute
 class Node(object):
     def __init__(self):
         self.value = None
