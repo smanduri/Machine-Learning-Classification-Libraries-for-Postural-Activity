@@ -6,7 +6,9 @@ import pandas as pd
 if __name__ == "__main__":
 
     # Testing the Return Function of the DatasetReader.py
-    #data = DataSetReader.getCsvDataset()
+    # Deprecated Use for the Multi-Classifier Dataset
+
+    # data = DataSetReader.getCsvDataset()
 
     data = pd.read_csv("dataset/Iris.csv")
 

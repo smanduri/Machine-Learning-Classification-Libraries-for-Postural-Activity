@@ -58,9 +58,6 @@ class GaussianNB:
         self._calc_class_prior()
         self._calc_likelihoods()
 
-        # print(self.likelihoods)
-        # print(self.class_priors)
-
     def _calc_class_prior(self):
 
         for outcome in np.unique(self.y_train):
@@ -89,7 +86,6 @@ class GaussianNB:
             for outcome in np.unique(self.y_train):
                 prior = self.class_priors[outcome]
                 likelihood = 1
-                evidence_temp = 1
 
                 for feat, feat_val in zip(self.features, query):
                     mean = self.likelihoods[feat][outcome]['mean']
