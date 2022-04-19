@@ -92,7 +92,7 @@ class GaussianNB:
 
     """
     :function: calculates the posterior probability 
-    :returns: the list of posterior probability outcomes
+    :returns: the list of posterior probability outcomes for the given input
     """
     def calculation_Class_Posterior(self):
 
