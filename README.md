@@ -46,10 +46,10 @@ the Train and Test Dataset)
 
 **1. Logistic Regression Classification
 Class:** logisticRegression
-**Methods:** __init__() , fit() , predict() , sigmoidFunction(), accuracy() , plot()
-**Implementation:** Logistic regression classificationwill be used to predict if the patient is sleeping, walking,
+**Methods:** __init__() , train_dataset_features() , testing_dataset_outcomes() , sigmoidFunction(), accuracy() , plot()
+**Implementation:** Logistic regression classificationwill be used to testing_dataset_outcomes if the patient is sleeping, walking,
 sitting, running, etc. It will make use of logistic function (sigmoid) over the data to provide binary classification
-for each postural activity. The data will be fitted into the model using fit() method. This includes data processing
+for each postural activity. The data will be fitted into the model using train_dataset_features() method. This includes data processing
 
 
 and feature segregation. The data will then be trained over to evaluate the model using sigmoidFunction()

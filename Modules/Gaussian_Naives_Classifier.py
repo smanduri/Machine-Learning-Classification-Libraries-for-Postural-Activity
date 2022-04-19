@@ -9,7 +9,7 @@ Input: Any Binary dataset with independent dataset (preferably)
 """
 
 
-class GaussianNB:
+class GaussianNaivesBayesClassifier:
     """Initializing the Variables"""
 
     def __init__(self):
@@ -28,7 +28,7 @@ class GaussianNB:
     :returns: Rounded Float Value of Accuracy Result
     """
     @staticmethod
-    def accuracy_score(y_true, y_pred):
+    def accuracy_score_calculator(y_true, y_pred):
 
         return round(float(sum(y_pred == y_true)) / float(len(y_true)) * 100, 2)
 
@@ -37,7 +37,7 @@ class GaussianNB:
     :returns: Dataframe of Input Variables and Series of Target Classes
     """
     @staticmethod
-    def pre_processing(df):
+    def pre_processing_split_Input_feature_classes(df):
 
         X = df.drop([df.columns[-1]], axis=1)
         y = df[df.columns[-1]]
@@ -66,7 +66,7 @@ class GaussianNB:
     :returns: class posterior calculation and likelihood of the classes
     """
 
-    def fit(self, X, y):
+    def train_dataset_features(self, X, y):
 
         self.dataSet_features = list(X.columns)
         self.X_train = X
@@ -86,7 +86,7 @@ class GaussianNB:
                 self.likelihoods_list[feature].update({outcome: {}})
                 self.class_priors.update({outcome: 0})
 
-        # Call the Method for
+        # Call the Method for Posterior, Likelihood
         self.calculation_Class_Posterior()
         self.calculation_Class_Likelihood()
 
@@ -125,7 +125,7 @@ class GaussianNB:
     Formula and Basic Understanding have been inspired from the citation given above. 
     """
 
-    def predict(self, X):
+    def testing_dataset_outcomes(self, X):
 
         posterior_Probability_Function_Outcome = []
         X = np.array(X)
