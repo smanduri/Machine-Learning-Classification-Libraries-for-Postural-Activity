@@ -1,5 +1,5 @@
 from DataSetReader import DataSetReader
-from Modules.Bernoulli_Naives_Classifier import GaussianNB
+from Modules.Gaussian_Naives_Classifier import GaussianNB
 import numpy as np
 import pandas as pd
 

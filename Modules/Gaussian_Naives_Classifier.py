@@ -76,9 +76,12 @@ class GaussianNB:
 
         # Iterates over the features of the dataset
         for feature in self.dataSet_features:
+
+            # Defining a likelihood dictionary for further use for getting the mean and variance based on the
+            # Input feature
             self.likelihoods[feature] = {}
 
-            #
+            # Adding the features to the likelihood and class priors dictionaries to add the mean and variance later
             for outcome in np.unique(self.y_train):
                 self.likelihoods[feature].update({outcome: {}})
                 self.class_priors.update({outcome: 0})
@@ -86,12 +89,19 @@ class GaussianNB:
         self._calc_class_prior()
         self._calc_likelihoods()
 
+    """
+    :function: calculates the posterior probability 
+    :returns: the list of posterior probability outcomes
+    """
     def _calc_class_prior(self):
 
         for outcome in np.unique(self.y_train):
             outcome_count = sum(self.y_train == outcome)
             self.class_priors[outcome] = outcome_count / self.train_size
 
+    """
+    
+    """
     def _calc_likelihoods(self):
 
         for feature in self.dataSet_features:
