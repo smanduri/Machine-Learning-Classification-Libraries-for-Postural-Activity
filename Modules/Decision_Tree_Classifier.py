@@ -140,7 +140,7 @@ def findEntropy(data, rows):
     return entropy, ans
 
 """#### Defining a function findMaxGain takes 3 arguments data(act), rows, columns and returns maxGain
-based on target classification of the activity on the selecting attribute
+based on target classification of the activity on the selected attribute
 separation from the training set"""
 
 def findMaxGain(data, rows, columns):
@@ -148,10 +148,6 @@ def findMaxGain(data, rows, columns):
     retidx = -1
     entropy, ans = findEntropy(data, rows)
     if entropy == 0:
-        """if ans == 1:
-            print("Yes")
-        else:
-            print("No")"""
         return maxGain, retidx, ans
 
     for jj in columns:
