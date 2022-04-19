@@ -1,5 +1,4 @@
 import math
-
 import numpy as np
 
 
@@ -7,7 +6,9 @@ class GaussianNB:
 
     def __init__(self):
 
-        self.features = list
+        """Initializing the Variables for our use"""
+
+        self.dataSet_features = list
         self.likelihoods = {}
         self.class_priors = {}
 
@@ -29,6 +30,11 @@ class GaussianNB:
 
         return X, y
 
+    """
+    function: Static Method for the Splitting of Test and Train for the X and y Variables
+    :returns: x_train: Input features for training; x_test: Input features for testing
+    y_train; Target class for training; y_test: Target class for Testing
+    """
     @staticmethod
     def train_test_split(x, y, test_train_split=0.25, random_state=None):
 
@@ -40,17 +46,23 @@ class GaussianNB:
 
         return x_train, x_test, y_train, y_test
 
+    """
+    :function: Tries to fit the Features with the outcome classes of the Training Dataset
+    :returns: class posterior calculation and likelihood of the classes
+    """
     def fit(self, X, y):
 
-        self.features = list(X.columns)
+        self.dataSet_features = list(X.columns)
         self.X_train = X
         self.y_train = y
         self.train_size = X.shape[0]
         self.num_feats = X.shape[1]
 
-        for feature in self.features:
+        # Iterates over the features of the dataset
+        for feature in self.dataSet_features:
             self.likelihoods[feature] = {}
 
+            #
             for outcome in np.unique(self.y_train):
                 self.likelihoods[feature].update({outcome: {}})
                 self.class_priors.update({outcome: 0})
@@ -66,33 +78,39 @@ class GaussianNB:
 
     def _calc_likelihoods(self):
 
-        for feature in self.features:
+        for feature in self.dataSet_features:
 
-            for outcome in np.unique(self.y_train):
-                self.likelihoods[feature][outcome]['mean'] = self.X_train[feature][
-                    self.y_train[self.y_train == outcome].index.values.tolist()].mean()
+            for target_Class_Feature in np.unique(self.y_train):
+                self.likelihoods[feature][target_Class_Feature]['mean'] = self.X_train[feature][
+                    self.y_train[self.y_train == target_Class_Feature].index.values.tolist()].mean()
 
-                self.likelihoods[feature][outcome]['variance'] = self.X_train[feature][
-                    self.y_train[self.y_train == outcome].index.values.tolist()].var()
+                self.likelihoods[feature][target_Class_Feature]['variance'] = self.X_train[feature][
+                    self.y_train[self.y_train == target_Class_Feature].index.values.tolist()].var()
 
+    """
+    Function: Predicts Whether the Input Features are for a particular class (target Classes) using Likelihood.
+    Returns: The Array of Results for the Likelihood of the Target Classes
+    Citation: https://towardsdatascience.com/naive-bayes-explained-9d2b96f4a9c0
+    Formula and Basic Understanding have been inspired from the citation given above. 
+    """
     def predict(self, X):
 
         results = []
         X = np.array(X)
 
-        for query in X:
+        for input_Features in X:
             probs_outcome = {}
 
             for outcome in np.unique(self.y_train):
                 prior = self.class_priors[outcome]
-                likelihood = 1
+                feature_Likelihood_Estimation = 1
 
-                for feat, feat_val in zip(self.features, query):
-                    mean = self.likelihoods[feat][outcome]['mean']
-                    var = self.likelihoods[feat][outcome]['variance']
-                    likelihood *= (1 / math.sqrt(2 * math.pi * var)) * np.exp(-(feat_val - mean) ** 2 / (2 * var))
+                for dataset_Feature, feature_Values in zip(self.dataSet_features, input_Features):
+                    mean = self.likelihoods[dataset_Feature][outcome]['mean']
+                    var = self.likelihoods[dataset_Feature][outcome]['variance']
+                    feature_Likelihood_Estimation *= (1 / math.sqrt(2 * math.pi * var)) * np.exp(-(feature_Values - mean) ** 2 / (2 * var))
 
-                posterior_numerator = (likelihood * prior)
+                posterior_numerator = (feature_Likelihood_Estimation * prior)
                 probs_outcome[outcome] = posterior_numerator
 
             result = max(probs_outcome, key=lambda x: probs_outcome[x])
