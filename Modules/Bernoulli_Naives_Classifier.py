@@ -1,12 +1,18 @@
 import math
 import numpy as np
 
+"""
+Function: Calculates the Gaussian Naives Bayes Classifier for the Input Dataset
+Static Methods: 3 Static Methods for Pre-Processing, Splitting and Accuracy Scoring
+Non-Static Methods: 4 Non-Static Method for fit, posterior calculation, likelihood estimations and predictions
+Input: Any Binary dataset with independent dataset (preferably)
+"""
+
 
 class GaussianNB:
 
+    """Initializing the Variables for our use"""
     def __init__(self):
-
-        """Initializing the Variables for our use"""
 
         self.dataSet_features = list
         self.likelihoods = {}
@@ -35,6 +41,7 @@ class GaussianNB:
     :returns: x_train: Input features for training; x_test: Input features for testing
     y_train; Target class for training; y_test: Target class for Testing
     """
+
     @staticmethod
     def train_test_split(x, y, test_train_split=0.25, random_state=None):
 
@@ -50,6 +57,7 @@ class GaussianNB:
     :function: Tries to fit the Features with the outcome classes of the Training Dataset
     :returns: class posterior calculation and likelihood of the classes
     """
+
     def fit(self, X, y):
 
         self.dataSet_features = list(X.columns)
@@ -93,6 +101,7 @@ class GaussianNB:
     Citation: https://towardsdatascience.com/naive-bayes-explained-9d2b96f4a9c0
     Formula and Basic Understanding have been inspired from the citation given above. 
     """
+
     def predict(self, X):
 
         results = []
@@ -108,7 +117,8 @@ class GaussianNB:
                 for dataset_Feature, feature_Values in zip(self.dataSet_features, input_Features):
                     mean = self.likelihoods[dataset_Feature][outcome]['mean']
                     var = self.likelihoods[dataset_Feature][outcome]['variance']
-                    feature_Likelihood_Estimation *= (1 / math.sqrt(2 * math.pi * var)) * np.exp(-(feature_Values - mean) ** 2 / (2 * var))
+                    feature_Likelihood_Estimation *= (1 / math.sqrt(2 * math.pi * var)) * np.exp(
+                        -(feature_Values - mean) ** 2 / (2 * var))
 
                 posterior_numerator = (feature_Likelihood_Estimation * prior)
                 probs_outcome[outcome] = posterior_numerator
