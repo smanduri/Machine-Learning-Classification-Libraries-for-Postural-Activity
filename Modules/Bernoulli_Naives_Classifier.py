@@ -10,8 +10,8 @@ Input: Any Binary dataset with independent dataset (preferably)
 
 
 class GaussianNB:
+    """Initializing the Variables"""
 
-    """Initializing the Variables for our use"""
     def __init__(self):
 
         self.dataSet_features = list
@@ -23,11 +23,19 @@ class GaussianNB:
         self.train_size = int
         self.num_feats = int
 
+    """
+    :function: Static Method for the Calculation of Accuracy for the predicted output
+    :returns: Rounded Float Value of Accuracy Result
+    """
     @staticmethod
     def accuracy_score(y_true, y_pred):
 
         return round(float(sum(y_pred == y_true)) / float(len(y_true)) * 100, 2)
 
+    """
+    :function: Static Method for Getting the Target Classes and Input Features
+    :returns: Dataframe of Input Variables and Series of Target Classes
+    """
     @staticmethod
     def pre_processing(df):
 
