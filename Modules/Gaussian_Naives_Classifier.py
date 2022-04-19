@@ -144,7 +144,7 @@ class GaussianNB:
                 for dataset_Feature, feature_Values in zip(self.dataSet_features, input_Features):
 
                     # Getting the Value of Mean and Variance
-                    mean_Input_Variables = self.likelihoods_list[dataset_Feature][feature_outcome]['mean_Input_Variables']
+                    mean_Input_Variables = self.likelihoods_list[dataset_Feature][feature_outcome]['mean']
                     variance_Input_Variables = self.likelihoods_list[dataset_Feature][feature_outcome]['variance']
 
                     # Calculating the Probability Density Function for the given features for the feature_outcome label
@@ -158,7 +158,7 @@ class GaussianNB:
             # Getting the final result of the Probability Outcome
             result_probability_list = max(probs_outcome, key=lambda x: probs_outcome[x])
 
-            # Append the results in the list
+            # Appending the results into the List
             posterior_Probability_Function_Outcome.append(result_probability_list)
 
         return np.array(posterior_Probability_Function_Outcome)
